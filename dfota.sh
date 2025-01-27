@@ -2,7 +2,7 @@
 set -x
 # Check if correct number of arguments are provided
 if [ "$#" -ne 3 ]; then
-    echo "Usage: $0 /home/deva/Desktop/2.1.6/image /home/deva/Desktop/2.0.4/image /home/deva/Desktop/2.0.4/atcmd"
+    echo "Usage: $0 <original_directory> <modified_directory> <atcmd_path>"
     exit 1
 fi
 
