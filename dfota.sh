@@ -1,8 +1,8 @@
 #!/bin/bash
 set -x
 # Check if correct number of arguments are provided
-if [ "$#" -ne 3 ]; then
-    echo "Usage: $0 <original_directory> <modified_directory> <atcmd_path>"
+if [ "$#" -ne 4 ]; then
+    echo "Usage: $0 <original_directory> <modified_directory> <atcmd_path> <atcmd_config_path>"
     exit 1
 fi
 
@@ -25,10 +25,18 @@ MD5_FILE="md5"
 DFOTA_TAR="dfota.tar.gz"
 mkdir -p "$PATCH_DIR"
 
+# Handle atcmd binary
 if [ -f "$3" ]; then
     atcmd_md5="$PATCH_DIR/atcmd.txt"
     md5sum "$3" | cut -d " " -f 1 > "$atcmd_md5"
     mv "$3" "$PATCH_DIR"
+fi
+
+# Handle atcmd_config.xml
+if [ -f "$4" ]; then
+    atcmd_config_md5="$PATCH_DIR/atcmd_config.xml.txt"
+    md5sum "$4" | cut -d " " -f 1 > "$atcmd_config_md5"
+    mv "$4" "$PATCH_DIR"
 fi
 
 # Loop through all files in the original directory
